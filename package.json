@@ -1,9 +1,9 @@
 {
-  "name": "angular-relative-date",
+  "name": "testabit-relative-date",
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/wildlyinaccurate/angular-relative-date.git"
+    "url": "https://github.com/testabit/angular-relative-date.git"
   },
   "dependencies": {},
   "devDependencies": {

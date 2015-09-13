@@ -1,10 +1,11 @@
 {
-  "name": "angular-relative-date",
+  "name": "testabit-relative-date",
   "version": "1.0.0",
   "description": "AngularJS filter to provide relative, human-readable dates.",
-  "homepage": "https://github.com/wildlyinaccurate/angular-relative-date",
+  "homepage": "https://github.com/testabit/angular-relative-date",
   "authors": [
-    "Joseph Wynn <joseph@wildlyinaccurate.com>"
+    "Joseph Wynn <joseph@wildlyinaccurate.com>",
+    "Dani Gonzalez <daniel.gonzalez@testabit.com>"
   ],
   "keywords": [
     "angular",
@@ -12,7 +13,7 @@
     "date"
   ],
   "license": "MIT",
-  "main": "./angular-relative-date.js",
+  "main": "./angular-relative-date.min.js",
   "dependencies": {
     "angular": ">=1.0.0",
     "angular-translate": ">=2.5.2"

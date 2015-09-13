@@ -13,7 +13,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     coffee: {
       options: {
-        sourceMap: true,
+        sourceMap: false,
         sourceRoot: ''
       },
       all: {

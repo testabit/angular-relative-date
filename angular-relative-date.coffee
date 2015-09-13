@@ -49,7 +49,7 @@ angular.module('relativeDate', [])
 
     (date) ->
       now = if _now then _now else new Date()
-      date = new Date(date) unless date instanceof Date
+      date = new Date((new Date(date)).getTime() + (new Date(date)).getTimezoneOffset() * 60000) unless date instanceof Date
       delta = null
 
       minute = 60
@@ -61,11 +61,6 @@ angular.module('relativeDate', [])
 
       delta = calculateDelta(now, date)
 
-      if delta > day && delta < week
-        # We're dealing with days now, so time becomes irrelevant
-        date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0)
-        delta = calculateDelta(now, date)
-
       translate = (translatePhrase, timeValue) ->
         if translatePhrase == 'just_now'
           translateKey = translatePhrase
@@ -76,19 +71,29 @@ angular.module('relativeDate', [])
 
         $translate.instant(translateKey, { time: timeValue })
 
-      switch
-        when delta < 30 then translate('just_now')
-        when delta < minute then translate('seconds', delta)
-        when delta < 2 * minute then translate('a_minute')
-        when delta < hour then translate('minutes', Math.floor(delta / minute))
-        when Math.floor(delta / hour) == 1 then translate('an_hour')
-        when delta < day then translate('hours', Math.floor(delta / hour))
-        when delta < day * 2 then translate('a_day')
-        when delta < week then translate('days', Math.floor(delta / day))
-        when Math.floor(delta / week) == 1 then translate('a_week')
-        when delta < month then translate('weeks', Math.floor(delta / week))
-        when Math.floor(delta / month) == 1 then translate('a_month')
-        when delta < year then translate('months', Math.floor(delta / month))
-        when Math.floor(delta / year) == 1 then translate('a_year')
-        else translate('over_a_year')
+      if delta > day && delta < week
+        # We're dealing with days now, so time becomes irrelevant
+        date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0)
+        delta = calculateDelta(new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0), date)
+        switch
+          when delta == day then translate('a_day')
+          when delta == week then translate('a_week')
+          else translate('days', Math.floor(delta / day))
+      else
+        switch
+          when delta < 30 then translate('just_now')
+          when delta < minute then translate('seconds', delta)
+          when delta < 2 * minute then translate('a_minute')
+          when delta < hour then translate('minutes', Math.floor(delta / minute))
+          when Math.floor(delta / hour) == 1 then translate('an_hour')
+          when delta < day then translate('hours', Math.floor(delta / hour))
+          when delta < day * 2 then translate('a_day')
+          when delta < week then translate('days', Math.floor(delta / day))
+          when Math.floor(delta / week) == 1 then translate('a_week')
+          when delta < month then translate('weeks', Math.floor(delta / week))
+          when Math.floor(delta / month) == 1 then translate('a_month')
+          when delta < year then translate('months', Math.floor(delta / month))
+          when Math.floor(delta / year) == 1 then translate('a_year')
+          else translate('over_a_year')
+
   ]
