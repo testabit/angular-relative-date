@@ -48,7 +48,7 @@ angular.module('relativeDate', [])
       Math.round(Math.abs(now - date) / 1000)
 
     (date) ->
-      now = if _now then _now else new Date()
+      now = if _now then _now else new Date((new Date()).getTime() + (new Date()).getTimezoneOffset() * 60000)
       date = new Date((new Date(date)).getTime() + (new Date(date)).getTimezoneOffset() * 60000) unless date instanceof Date
       delta = null
 
