@@ -47,7 +47,7 @@
       };
       return function(date) {
         var day, delta, hour, minute, month, now, translate, week, year;
-        now = _now ? _now : new Date();
+        now = _now ? _now : new Date((new Date()).getTime() + (new Date()).getTimezoneOffset() * 60000);
         if (!(date instanceof Date)) {
           date = new Date((new Date(date)).getTime() + (new Date(date)).getTimezoneOffset() * 60000);
         }
